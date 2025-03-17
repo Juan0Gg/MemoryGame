@@ -1,14 +1,22 @@
 const $cardsContainer = document.querySelectorAll(".card");
 const $fragment = document.createDocumentFragment();
+const $info = document.querySelector(".info h2");
+const $resetGame = document.querySelector(".reset-game");
+const $startGame = document.querySelector(".start");
+const $countdown = document.querySelector(".countdown h3 span");
 
 const cardsSelected = [];
 let hasFlippedCard = false;
 let card1, card2;
 let lockBoard = false;
 
+let timeEasing = 1000 * 20; // 20 segundos
+let isWin = true;
+let counter = timeEasing;
+
 const UnflipCards = () => {
   lockBoard = true;
-  console.log(`${card1.dataset.card} y ${card2.dataset.card} no son iguales`);
+  //console.log(`${card1.dataset.card} y ${card2.dataset.card} no son iguales`);
   setTimeout(() => {
     card1.classList.remove("flip");
     card2.classList.remove("flip");
@@ -58,12 +66,69 @@ const flipCard = (e) => {
 
   checkForMatch();
 };
-suffleCards();
-$cardsContainer.forEach((element) => {
-  element.addEventListener("click", (e) => {
-    flipCard(e);
-  });
-  //element.addEventListener("click", toggleCard);
+
+const timeOut = () => {
+  const intervalId = setInterval(() => {
+    counter -= 1000;
+    $countdown.innerHTML = `${counter / 1000}`;
+
+    if (counter === 0) {
+      clearInterval(intervalId); // Detener el intervalo
+
+      $cardsContainer.forEach((el) => {
+        el.removeEventListener("click", flipCard),
+          (el.style.pointerEvents = "none");
+      });
+
+      for (let i = 0; i < $cardsContainer.length; i++) {
+        console.log(
+          `${$cardsContainer[i].dataset.card} no tiene la clase flip`
+        );
+
+        if (!$cardsContainer[i].classList.contains("flip")) {
+          isWin = false;
+          console.log(isWin);
+        }
+      }
+
+      if (isWin) {
+        $info.innerHTML = "Has ganado";
+      } else {
+        $info.innerHTML = "Se te acabo el tiempo";
+        setTimeout(() => {
+          location.reload();
+        }, 3000);
+      }
+
+      //location.reload(); // Recargar la página solo una vez
+    }
+  }, 1000); // Intervalo de 1 segundo
+};
+
+//timeOut(); // Llamar a la función para iniciar el temporizador
+
+const isShow = (e) => {};
+
+//suffleCards();
+//timeOut();
+
+document.addEventListener("click", (e) => {
+  if (e.target == $startGame) {
+    suffleCards();
+    $info.innerHTML = "Encuentra las parejas";
+    $cardsContainer.forEach((element) => {
+      element.addEventListener("click", (e) => {
+        flipCard(e);
+      });
+      //element.addEventListener("click", toggleCard);
+    });
+    e.target.style.display = "none";
+
+    timeOut();
+  }
+  if (e.target == $resetGame) {
+    location.reload();
+  }
 });
 //https://marina-ferreira.github.io/tutorials/js/memory-game/
 //Card positioning animation

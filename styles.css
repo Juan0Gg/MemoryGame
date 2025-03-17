@@ -39,6 +39,7 @@ h1 {
   text-align: center;
   font-size: 1.1rem;
   margin: 1px 0;
+  cursor: pointer;
 }
 
 body {
@@ -93,12 +94,31 @@ body {
 
 .start {
   /* This is a button */
+  position: absolute;
+  top: 55%;
+  left: 83%;
   background: #1c7ccc;
   color: white;
-  padding: 1px 30px;
+  padding: 15px 30px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin: 2px auto;
+  margin: 1px auto;
   display: block;
+}
+
+.dont-show {
+  display: none;
+}
+
+.countdown {
+  position: absolute;
+  top: 50%;
+  left: 80%;
+}
+
+.info {
+  position: absolute;
+  top: 40%;
+  left: 78%;
 }
