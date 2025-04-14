@@ -52,9 +52,12 @@ body {
 .cards {
   width: 640px;
   height: 640px;
-  margin: auto;
+  margin: 0 auto;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .card {
@@ -121,4 +124,66 @@ body {
   position: absolute;
   top: 40%;
   left: 78%;
+}
+
+/* @media screen and (max-width: 720px) {
+  .cards {
+    width: 700px;
+    height: 500px;
+  }
+
+  .card {
+    width: calc(25% - 10px);
+    height: calc(35% - 10px);
+  }
+
+  .start {
+    top: 92%;
+    left: 45%;
+  }
+
+  .countdown {
+    top: 92%;
+    left: 80%;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .info {
+    top: 92%;
+    left: 10%;
+    font-size: 12px;
+    text-align: center;
+  }
+} */
+
+@media screen and (min-width: 100px) and (max-width: 720px) {
+  .cards {
+    width: 300px;
+    height: 500px;
+  }
+
+  .card {
+    width: calc(33% - 10px);
+    height: calc(28% - 10px);
+  }
+
+  .start {
+    top: 90%;
+    left: 40%;
+  }
+
+  .countdown {
+    top: 91%;
+    left: 70%;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .info {
+    top: 91%;
+    left: 10%;
+    font-size: 12px !important;
+    text-align: center;
+  }
 }
